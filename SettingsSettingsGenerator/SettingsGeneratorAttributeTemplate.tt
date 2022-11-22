@@ -7,8 +7,10 @@
 // THIS (.cs) FILE IS GENERATED. DO NOT CHANGE IT.
 // </auto-generated>
 
-namespace SettingsSettingsGenerator
+namespace <#= GenerateHelper.Namespace #>
 {
+    [global::System.CodeDom.Compiler.GeneratedCode("<#= GenerateHelper.GeneratorName #>", "<#= GenerateHelper.GeneratorVersion #>")]
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [global::System.AttributeUsage(global::System.AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     internal sealed class SettingsGeneratorAttribute : global::System.Attribute
     {
@@ -16,7 +18,7 @@ namespace SettingsSettingsGenerator
 
         public SettingsGeneratorAttribute(string key)
         {
-            this.Key = key;
+            Key = key;
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿#pragma warning disable IDE0060
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,22 +11,38 @@ namespace SettingsSettingsGenerator
         internal const string GeneratorName = "SettingsGenerator";
         internal const string GeneratorVersion = "1.0.0.0";
         internal const string Namespace = nameof(SettingsSettingsGenerator);
+
+        internal const string AttributeFilename = "SettingsGeneratorAttribute.cs";
+        internal const string AttributeCs = @$"namespace {Namespace}
+{{
+    [global::System.CodeDom.Compiler.GeneratedCode(""{GeneratorName}"", ""{GeneratorVersion}"")]
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    [global::System.AttributeUsage(global::System.AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
+    internal sealed class SettingsGeneratorAttribute : global::System.Attribute
+    {{
+        public string Key {{ get; }}
+
+        public SettingsGeneratorAttribute(string key)
+        {{
+            Key = key;
+        }}
+    }}
+}}
+";
+
+        internal static bool ContainsGeneratorName(string? name) => name is GeneratorName or $"{GeneratorName}Attribute";
+
+        internal static string ToUpperOnlyFirst(this string str) => char.ToUpper(str[0]) + str.Substring(1);
     }
 
-    static class StringExtension
-    {
-        //public static string ToLowerOnlyFirst(this string str) => Char.ToLower(str[0]) + str.Substring(1);
-        public static string ToUpperOnlyFirst(this string str) => Char.ToUpper(str[0]) + str.Substring(1);
-        //public static string JoinWithCommas(this IEnumerable<string> ss) => string.Join(", ", ss);
-    }
-
-    static class RoslynExtension
+    internal static class RoslynExtension
     {
         // Code from: https://github.com/YairHalberstadt/stronginject/blob/779a38e7e74b92c87c86ded5d1fef55744d34a83/StrongInject/Generator/RoslynExtensions.cs#L166
-        public static string FullName(this INamespaceSymbol @namespace) => @namespace.ToDisplayString(new SymbolDisplayFormat(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces));
+        internal static string FullName(this INamespaceSymbol @namespace) =>
+            @namespace.ToDisplayString(new SymbolDisplayFormat(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces));
 
         // Code from: https://github.com/YairHalberstadt/stronginject/blob/779a38e7e74b92c87c86ded5d1fef55744d34a83/StrongInject/Generator/RoslynExtensions.cs#L69
-        public static IEnumerable<INamedTypeSymbol> GetContainingTypesAndThis(this INamedTypeSymbol? namedType)
+        internal static IEnumerable<INamedTypeSymbol> GetContainingTypesAndThis(this INamedTypeSymbol? namedType)
         {
             var current = namedType;
             while (current is not null)
@@ -39,7 +53,7 @@ namespace SettingsSettingsGenerator
         }
 
         // Code from: https://github.com/YairHalberstadt/stronginject/blob/779a38e7e74b92c87c86ded5d1fef55744d34a83/StrongInject/Generator/SourceGenerator.cs#L87
-        public static string GenerateHintName(this INamedTypeSymbol container)
+        internal static string GenerateHintName(this INamedTypeSymbol container)
         {
             var stringBuilder = new StringBuilder();
             stringBuilder.Append(container.ContainingNamespace.FullName());
@@ -60,9 +74,9 @@ namespace SettingsSettingsGenerator
         //public static string? NullIfEmpty(this string? value) => string.IsNullOrEmpty(value) ? null : value;
     }
 
-    static class SyntaxExtension
+    internal static class SyntaxExtension
     {
-        public static string GetGenericTypeName(this TypeDeclarationSyntax typeDecl)
+        internal static string GetGenericTypeName(this TypeDeclarationSyntax typeDecl)
         {
             if (typeDecl.TypeParameterList is null)
                 return typeDecl.Identifier.Text;
