@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettingsSettingsGenerator",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettingsSample", "SettingsSample\SettingsSample.csproj", "{AE0FEA92-149E-44B4-A4EB-D54FBA156EB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettingsSettingsGenerator2", "SettingsSettingsGenerator2\SettingsSettingsGenerator2.csproj", "{5892456A-69E5-41FE-9A74-3D684E86DEF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettingsSettingsGenerator2", "SettingsSettingsGenerator2\SettingsSettingsGenerator2.csproj", "{5892456A-69E5-41FE-9A74-3D684E86DEF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -9,7 +9,7 @@ namespace SettingsSettingsGenerator
     internal static class GenerateHelper
     {
         internal const string GeneratorName = "SettingsGenerator";
-        internal const string GeneratorVersion = "1.0.0.0";
+        internal const string GeneratorVersion = "0.2.0.0";
         internal const string Namespace = nameof(SettingsSettingsGenerator);
 
         internal const string AttributeFilename = "SettingsGeneratorAttribute.cs";

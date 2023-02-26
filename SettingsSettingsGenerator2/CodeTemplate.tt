@@ -68,8 +68,13 @@ namespace <#= Namespace #>
             field = value;
             _isChanged = true;
 
-            PropertyChanged?.Invoke(this, new global::System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            NotifyPropertyChanged(propertyName);
             return true;
+        }
+
+        void NotifyPropertyChanged([global::System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new global::System.ComponentModel.PropertyChangedEventArgs(propertyName));
         }
     }
 }
